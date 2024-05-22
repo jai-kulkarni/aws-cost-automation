@@ -1,0 +1,5 @@
+#mail_body
+
+Account  -  Type  -  Status  -  Total  -  Top Services
+
+#dynamic_rows

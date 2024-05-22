@@ -1,6 +1,6 @@
 import datetime
 from get_cost_details import get_cost_details
-
+from utils import build_body_for_costing_mail, send_email
 
 def trigger_mail():
     try:
@@ -16,6 +16,7 @@ def trigger_mail():
             <br/>
             Please be advised that we have received the bill for organization accounts dated {display_date}
         """
+        subject = "Daily Bill | AWS Organization Accounts"
 
         # For weekly cost (commented out)
         # start_date = date_info.get('week').strftime("%Y-%m-%d")
@@ -26,6 +27,7 @@ def trigger_mail():
         #     <br/>
         #     Please be advised that we have received the bill for organization accounts dated {display_date}
         # """
+        # subject = "Weekly Bill | AWS Organization Accounts"
 
         # Retrieve billing details
         billing_details = get_cost_details(start_date=start_date, end_date=end_date)
@@ -33,7 +35,13 @@ def trigger_mail():
 
         # Sort accounts cost in descending order
         sorted_mail_content = sorted(mail_content, key=lambda item: float(item['total']), reverse=True)
-        return sorted_mail_content
+
+        # Build HTML and TEXT templates for email
+        templates = build_body_for_costing_mail(sorted_mail_content, email_body_content)
+
+        # Trigger email
+        response = send_email(templates, subject)
+        return response
 
     except Exception as e:
         # Log the error and return an error message
