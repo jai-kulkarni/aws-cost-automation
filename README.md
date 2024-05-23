@@ -1,13 +1,14 @@
 # AWS Cost Automation for Organization Accounts
 
 This project aims to automate AWS cost analysis for organization accounts, providing insights into spending patterns and top services utilized. By leveraging AWS Lambda functions and necessary permissions, this solution offers a clear picture of expenditure across all member accounts within an organization.
-
+Additionally, it includes an email template feature to trigger email notifications with cost insights.
 
 ## Pre-requisites
 
 1. **AWS Management Account**: Access to an AWS management account with permissions to manage all member accounts within the organization.
 2. **Lambda Function Access**: Access to AWS Lambda service with the runtime environment set to Python.
 3. **Lambda Function Role Permissions**: Adequate permissions assigned to the Lambda function role, including permissions for AWS Cost Explorer and SES (Simple Email Service).
+4. **SES Identity Verification**: A verified SES identity (email address or domain) that will be used to send emails.
 
 
 ## Purpose
